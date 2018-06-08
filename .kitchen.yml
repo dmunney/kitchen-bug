@@ -1,0 +1,39 @@
+---
+provisioner:
+  name: chef_zero
+  require_chef_omnibus: true
+
+platforms:
+  - name: sandbox
+    os_type: windows
+    driver:
+      subnet_id: {{your-subnet-id}}
+      security_group_ids: ['{{your-security-group-id}}']
+      iam_profile_name: {{your-iam-profile-name}}
+      tags:
+        Environment: sandbox
+    transport:
+      name: winrm
+      username: chef-test-kitchen
+      password: im-ron-burgundy?
+
+driver:
+  name: ec2
+  image_search:
+    # Amazon Windows Server AMI
+    owner-id: "801119661308"
+    name: Windows_Server-2012-R2_RTM-English-64Bit-Base-*
+  region: us-west-2
+  availability_zone: us-west-2a
+  instance_type: t2.micro
+  aws_ssh_key_id: {{your-kitchen-key}}
+  tags:
+    Name: windows-test-kitchen
+    Project: test-driven-infrastructure
+    Creator: test-kitchen
+
+
+suites:
+  - name: foo
+    run_list:
+      - recipe[kitchenbug::foo]

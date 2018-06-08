@@ -1,0 +1,6 @@
+name             'kitchenbug'
+maintainer       'Daren Munroe'
+license          'all_rights'
+description      'demonstrates kitchen bug'
+long_description 'Validate that an AWS EC2 instance recipe converges and fails on verification'
+version          '1.0.0'
